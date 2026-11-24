@@ -19,6 +19,7 @@ All notable changes to `getodden/mail` are recorded here. The format follows [Ke
 ### Fixed
 
 - Document and slot `direction` is normalized to exactly `ltr` or `rtl` (anything else becomes `ltr`) before it reaches the layout, so a crafted theme value cannot inject CSS into the `<style>` block.
+- Editor muted text (`--ome-muted`) is now `#475569`, meeting WCAG 2.2 SC 1.4.3 (4.5:1) on the canvas, line and surface backgrounds.
 
 ## [3.0.0] - 2026-11-04
 
