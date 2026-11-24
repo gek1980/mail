@@ -53,7 +53,7 @@ class EmailSlotCompiler
         $interpolate = (bool) ($options['interpolate'] ?? false);
 
         $editorMarkers = (bool) ($options['editor_markers'] ?? false);
-        $direction = $options['direction'] ?? ($theme['direction'] ?? 'ltr');
+        $direction = $this->normalizeDirection($options['direction'] ?? $theme['direction'] ?? null);
 
         BlockMergeTags::assertValid('subject', $document->subject);
         BlockMergeTags::assertValid('preview_text', $document->previewText);
@@ -191,8 +191,14 @@ class EmailSlotCompiler
             'slot' => $slot,
             'data' => $data,
             'theme' => SafeColor::theme(array_merge($this->defaultConfig, $theme)),
-            'direction' => $options['direction'] ?? ($theme['direction'] ?? 'ltr'),
+            'direction' => $this->normalizeDirection($options['direction'] ?? $theme['direction'] ?? null),
         ])->render();
+    }
+
+    /** Direction lands in a CSS declaration, so only the exact string 'rtl' is right-to-left. */
+    private function normalizeDirection(mixed $direction): string
+    {
+        return $direction === 'rtl' ? 'rtl' : 'ltr';
     }
 
     /**

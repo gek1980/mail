@@ -16,6 +16,10 @@ All notable changes to `getodden/mail` are recorded here. The format follows [Ke
 
 - Stray empty `package-lock.json`; the library ships no npm lockfile.
 
+### Fixed
+
+- Document and slot `direction` is normalized to exactly `ltr` or `rtl` (anything else becomes `ltr`) before it reaches the layout, so a crafted theme value cannot inject CSS into the `<style>` block.
+
 ## [3.0.0] - 2026-11-04
 
 Version 3.0.0 is a major release because it changes what the compiler keeps from raw HTML and rich text, rejects some merge tag structures that 2.x rendered, and changes public types. If you only compile slots you built yourself, most emails render the same. If tenant users paste HTML, write `{% if %}` blocks in text fields, or you subclass the compiler, read [Upgrade notes](#upgrade-notes) first.

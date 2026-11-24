@@ -1,5 +1,5 @@
 @php
-    $dir = $direction ?? ($theme['direction'] ?? 'ltr');
+    $dir = ($direction ?? ($theme['direction'] ?? 'ltr')) === 'rtl' ? 'rtl' : 'ltr';
     $lang = $theme['lang'] ?? 'en';
     $darkBackground = $theme['dark_background_color'] ?? null;
     $darkText = $theme['dark_text_color'] ?? null;
