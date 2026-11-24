@@ -12,6 +12,10 @@ All notable changes to `getodden/mail` are recorded here. The format follows [Ke
 - Theme key `view_in_browser_label` sets the text of the header's "View in browser" link.
 - Dark mode. Theme keys `dark_background_color`, `dark_text_color` and `dark_content_background_color` add a `prefers-color-scheme: dark` block. A key left out adds no override.
 
+### Removed
+
+- Stray empty `package-lock.json`; the library ships no npm lockfile.
+
 ## [3.0.0] - 2026-11-04
 
 Version 3.0.0 is a major release because it changes what the compiler keeps from raw HTML and rich text, rejects some merge tag structures that 2.x rendered, and changes public types. If you only compile slots you built yourself, most emails render the same. If tenant users paste HTML, write `{% if %}` blocks in text fields, or you subclass the compiler, read [Upgrade notes](#upgrade-notes) first.
