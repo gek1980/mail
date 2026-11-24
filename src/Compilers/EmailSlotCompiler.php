@@ -53,6 +53,7 @@ class EmailSlotCompiler
         $interpolate = (bool) ($options['interpolate'] ?? false);
 
         $editorMarkers = (bool) ($options['editor_markers'] ?? false);
+        $direction = $options['direction'] ?? ($theme['direction'] ?? 'ltr');
 
         BlockMergeTags::assertValid('subject', $document->subject);
         BlockMergeTags::assertValid('preview_text', $document->previewText);
@@ -64,7 +65,7 @@ class EmailSlotCompiler
                 continue;
             }
 
-            $compiled = $this->compileSlot($slot, $theme, ['fetch_feeds' => $options['fetch_feeds'] ?? true]);
+            $compiled = $this->compileSlot($slot, $theme, ['fetch_feeds' => $options['fetch_feeds'] ?? true, 'direction' => $direction]);
 
             $slotsHtml .= $editorMarkers ? '<div data-odden-slot="'.$index.'">'.$compiled.'</div>' : $compiled;
 
@@ -81,7 +82,7 @@ class EmailSlotCompiler
             'previewText' => $previewText,
             'subject' => $subject,
             'theme' => $theme,
-            'direction' => $options['direction'] ?? ($theme['direction'] ?? 'ltr'),
+            'direction' => $direction,
         ])->render();
 
         if ($interpolate && $context !== null && $this->interpolator !== null) {
@@ -190,6 +191,7 @@ class EmailSlotCompiler
             'slot' => $slot,
             'data' => $data,
             'theme' => SafeColor::theme(array_merge($this->defaultConfig, $theme)),
+            'direction' => $options['direction'] ?? ($theme['direction'] ?? 'ltr'),
         ])->render();
     }
 
